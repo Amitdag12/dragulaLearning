@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <script src="https://cdn.tutorialjinni.com/dragula/3.7.3/dragula.js"></script>
+    <script src="https://cdn.tutorialjinni.com/dragula/3.7.3/dragula.min.js"></script>
+    <style>
+        .gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+        .myContain{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: solid;
+            min-height: 100px;
+            width: 100px;
+        }
+        .container {
+            border: solid;
+            width: 200px;
+            min-height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+
+}
+.container:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.container > div,
+.gu-mirror {
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease-in-out;
+}
+.NewFilesContainer{
+    position: absolute;
+    left: 78%;
+    top: 1%;
+    border:solid;
+    height: 97%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.page{
+ width: 100px;
+ height: 100px;
+ border:solid;
+ position: relative;
+}
+.pageContainer{
+    position: absolute;
+            top: 0%;
+            left: 50%;
+            border: solid;
+            height: unset !important;
+            width: unset !important;
+}
+.addFilesBtn{
+
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    border: solid;
+    width: 200px;
+            min-height: 200px;
+
+
+}
+.addFilesBtn:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+    </style>
+<div id='left-defaults' class="pageContainer container">
+    <div class="page">
+
+    </div>
+    <div class="page">
+
+    </div>
+    <div class="page">
+
+    </div>
+    <div class="page">
+
+    </div>
+</div>
+<div class="NewFilesContainer">
+<button type="button" id="AddFileSection" class="addFilesBtn">add new file</button>
+</div>
+<script>
+
+    var divs=[...document.getElementsByClassName("container")];
+console.log(divs);
+var drake  =dragula(divs,{ignoreInputTextSelection:true});
+//refeshDragula();
+$("#AddFileSection").on("click",(event)=>{
+    console.log(event);
+let parent=event.target.parentElement;
+let newDiv=document.createElement("div");
+let newInput=document.createElement("input");
+newInput.type="text";
+newInput.placeholder="file Name";
+newDiv.append(newInput);
+newDiv.classList.add("container");
+newDiv.style.height="unset";
+parent.insertBefore(newDiv, parent.firstChild);
+drake.containers.push(newDiv);
+
+})
+function refeshDragula(){
+    var divs=[...document.getElementsByClassName("container")];
+console.log(divs);
+return dragula(divs);
+}
+</script>
+</body>
+</html> 
